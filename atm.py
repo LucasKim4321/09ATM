@@ -16,7 +16,7 @@ while True:
 
     # 입출금
     if service_num == '1' or  service_num == '2':
-        amount = int(input('금액을 입력하세요. :b').strip())  #strip() 없어도 문제없긴 함.
+        amount = int(input(f"{'입금' if service_num == '1' else '출금'}하실 금액을 입력하세요. :b  ").strip())  #strip() 없어도 문제없긴 함.
 
         초과_여부 = False
 
@@ -38,11 +38,13 @@ while True:
     # 영수증 출력
     if service_num == '3':
         print('현재 잔액:', balance)
-        print("모든 거래 내역")
-        for i in range(len(receipts)):
+        print("모든 거래 내역 (최근 거래순)")
+        for i in reversed(range(len(receipts))):
             print(f"{'입금' if receipts[i][0] > 0 else '출금'} : {abs(receipts[i][0])}, 잔액 : {receipts[i][1]}")
 
     # 종료
     if service_num == '4':
+        print("서비스를 종료하겠습니다.")
         print(f"현재 잔액은 {balance}원 입니다!")
+        print("안녕히가십시오!")
         break

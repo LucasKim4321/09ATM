@@ -21,6 +21,7 @@ while True:
         초과_여부 = False
 
         if service_num == '2':
+            # amount = min(balance, amount)  # 두 값을 비교해서 작은 값을 반환
             if amount > balance :
                 amount = balance
                 초과_여부 = True

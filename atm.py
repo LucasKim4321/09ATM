@@ -29,9 +29,10 @@ while True:
         balance += amount
         거래_정보 = (amount, balance)
         receipts.append(거래_정보)
+        # receipts.insert(len(receipts), 거래_정보)
         
         if(초과_여부 == True):
-            print(f"************************\n영수증\n****\n출금 가능한 금액을 초과하여 현재 잔액 만큼만 출금합니다!\n****\n{'입금' if service_num == '1' else '출금'}: {abs(amount)}원. \n현재 잔액은 {balance}원입니다.\n****\n************************")
+            print(f"************************\n영수증\n****\n출금 가능한 금액을 초과하여 현재 잔액 만큼만 출금합니다!\n****\n출금: {abs(amount)}원. \n현재 잔액은 {balance}원입니다.\n****\n************************")
         else:
             print(f"************************\n영수증\n****\n{'입금' if service_num == '1' else '출금'}: {abs(amount)}원. \n현재 잔액은 {balance}원입니다.\n****\n************************")
 

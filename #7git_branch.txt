@@ -1,0 +1,6 @@
+브랜치 전략
+
+git branch -l  #브랜치 목록
+git branch develop  #브랜치 생성
+git switch develop  #브랜치로 이동
+git branch feature/deposit

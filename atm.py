@@ -12,30 +12,42 @@ balance = 7000
 while True:
 
     # 서비스 코드 입력
-    service_num = input("사용하실 기능을 선택해주세요 (1:입금, 2:출금, 3:영수증 보기, 4:종료)")
+    service_num = input("사용하실 기능을 선택해주세요 (1:입금, 2:출금, 3:영수증 보기, 4:종료)").strip()
+    # 숫자 입력시에만 형변환, 덤으로 -도 입력 안됨 :b
+    if not(service_num.isdigit()):
+        print("숫자만 입력해주세요!")
+        continue
 
     # 입출금
     if service_num == '1' or  service_num == '2':
-        amount = int(input(f"{'입금' if service_num == '1' else '출금'}하실 금액을 입력하세요. :b  ").strip())  #strip() 없어도 문제없긴 함.
+        while True:
+            amount = input(f"{'입금' if service_num == '1' else '출금'}하실 금액을 입력하세요. :b  ").strip()  #strip() 없어도 문제없긴 함.
+            # 숫자 입력시에만 형변환, 덤으로 -도 입력 안됨 :b
+            if not(amount.isdigit()):
+                print("숫자만 입력해주세요!")
+                continue
+            else:
+                amount = int(amount)
 
-        초과_여부 = False
+            초과_여부 = False
 
-        if service_num == '2':
-            # amount = min(balance, amount)  # 두 값을 비교해서 작은 값을 반환
-            if amount > balance :
-                amount = balance
-                초과_여부 = True
-            amount = -amount
-        
-        balance += amount
-        거래_정보 = (amount, balance)
-        receipts.append(거래_정보)
-        # receipts.insert(len(receipts), 거래_정보)
-        
-        if(초과_여부 == True):
-            print(f"************************\n영수증\n****\n출금 가능한 금액을 초과하여 현재 잔액 만큼만 출금합니다!\n****\n출금: {abs(amount)}원. \n현재 잔액은 {balance}원입니다.\n****\n************************")
-        else:
-            print(f"************************\n영수증\n****\n{'입금' if service_num == '1' else '출금'}: {abs(amount)}원. \n현재 잔액은 {balance}원입니다.\n****\n************************")
+            if service_num == '2':
+                # amount = min(balance, amount)  # 두 값을 비교해서 작은 값을 반환
+                if amount > balance :
+                    amount = balance
+                    초과_여부 = True
+                amount = -amount
+            
+            balance += amount
+            거래_정보 = (amount, balance)
+            receipts.append(거래_정보)
+            # receipts.insert(len(receipts), 거래_정보)
+            
+            if(초과_여부 == True):
+                print(f"************************\n영수증\n****\n출금 가능한 금액을 초과하여 현재 잔액 만큼만 출금합니다!\n****\n출금: {abs(amount)}원. \n현재 잔액은 {balance}원입니다.\n****\n************************")
+            else:
+                print(f"************************\n영수증\n****\n{'입금' if service_num == '1' else '출금'}: {abs(amount)}원. \n현재 잔액은 {balance}원입니다.\n****\n************************")
+            break
 
     # 영수증 출력
     if service_num == '3':
@@ -43,6 +55,7 @@ while True:
         print("모든 거래 내역 (최근 거래순)")
         for i in reversed(range(len(receipts))):
             print(f"{'입금' if receipts[i][0] > 0 else '출금'} : {abs(receipts[i][0])}, 잔액 : {receipts[i][1]}")
+        print("***************************")
 
     # 종료
     if service_num == '4':

@@ -4,6 +4,7 @@
 # 종료를 누르면 서비스를 종료한다는 메시지를 출력하고현재 잔액을 보여주세요.
 
 receipts = [ (2000, 3000), (-1000, 2000), (5000, 7000) ]
+# receipts = []
 print("이전 영수증 리스트:",receipts)
 
 balance = 7000
@@ -52,10 +53,15 @@ while True:
     # 영수증 출력
     if service_num == '3':
         print('현재 잔액:', balance)
-        print("모든 거래 내역 (최근 거래순)")
-        for i in reversed(range(len(receipts))):
-            print(f"{'입금' if receipts[i][0] > 0 else '출금'} : {abs(receipts[i][0])}, 잔액 : {receipts[i][1]}")
-        print("***************************")
+        if receipts:
+            print("모든 거래 내역 (최근 거래순)")
+            # for i in reversed(range(len(receipts))):  # reversed() 역순으로 리턴
+                # print(f"{'입금' if receipts[i][0] > 0 else '출금'} : {abs(receipts[i][0])}, 잔액 : {receipts[i][1]}")  # abs(숫자) 절대값 리턴
+            for i in reversed(receipts):
+                print(f"{'입금' if i[0] > 0 else '출금'} : {abs(i[0])}, 잔액 : {i[1]}")
+            print("***************************")
+        else:
+            print("출력할 거래 내역이 없습니다. :b")
 
     # 종료
     if service_num == '4':

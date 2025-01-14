@@ -4,3 +4,6 @@ git branch -l  #브랜치 목록
 git branch develop  #브랜치 생성
 git switch develop  #브랜치로 이동
 git branch feature/deposit
+
+git tag -a v1.0 -m "ATM 서비스 배포 1.0"
+git push --tags
